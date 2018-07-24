@@ -17,9 +17,12 @@ class Test extends REST_Controller {
 
 	}
 
-	public function index()
+	public function index_get()
 	{
-		echo 'Hola mundo';
+		$this->response([
+			'ok'=> true,
+			'data'=> 'Hola mundo'
+		]);
 	}
 	
 	public function get_array_get( $i = 0 ) {
