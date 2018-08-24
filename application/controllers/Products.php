@@ -19,8 +19,8 @@ class Products extends REST_Controller {
 
 	public function all_get( $page = 0, $limit = 10 ) {
 
-		if ($page < 0) { $page = 0; }
-		if ($limit < 0) { $limit = 10; }
+		if ($page <= 0) { $page = 0; }
+		if ($limit <= 0) { $limit = 10; }
 
 		$page = $page === 0 ? 0 : $page * 10 - 10;
 
@@ -30,6 +30,7 @@ class Products extends REST_Controller {
 		$this->response([
 			'ok'=> true,
 			'count' => $count->result()[0],
+			'pagination' => ["from" => $page, "limit" => $limit],
 			'data'=> $query->result_array()
 		]);
 	}
@@ -37,13 +38,13 @@ class Products extends REST_Controller {
 	public function by_type_get($type = 0, $page = 0, $limit = 10) {
 
 		if ($type === 0) {
-			$response = ['ok'=> false, 'error'=>['message' => 'type is required']];
+			$response = ['ok'=> false, 'error'=> ['message' => 'type is required']];
 			$this->response( $response, REST_Controller::HTTP_BAD_REQUEST );
 			return;
 		}
 
-		if ($page < 0) { $page = 0; }
-		if ($limit < 0) { $limit = 10; }
+		if ($page <= 0) { $page = 0; }
+		if ($limit <= 0) { $limit = 10; }
 
 		$page = $page === 0 ? 0 : $page * 10 - 10;
 
@@ -53,6 +54,7 @@ class Products extends REST_Controller {
 		$this->response([
 			'ok'=> true,
 			'count' => $count->result()[0],
+			'pagination' => ["from" => $page, "limit" => $limit],
 			'data'=> $query->result_array()
 		]);
 
@@ -60,8 +62,8 @@ class Products extends REST_Controller {
 
 	public function search_get($term = '', $page = 0, $limit = 10) {
 
-		if ($page < 0) { $page = 0; }
-		if ($limit < 0) { $limit = 10; }
+		if ($page <= 0) { $page = 0; }
+		if ($limit <= 0) { $limit = 10; }
 
 		$page = $page === 0 ? 0 : $page * 10 - 10;
 
@@ -71,6 +73,7 @@ class Products extends REST_Controller {
 		$this->response([
 			'ok'=> true,
 			'count' => $count->result()[0],
+			'pagination' => ["from" => $page, "limit" => $limit],
 			'term'=> $term,
 			'data'=> $query->result_array()
 		]);
