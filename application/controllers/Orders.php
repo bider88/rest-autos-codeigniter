@@ -91,7 +91,7 @@ class Orders extends REST_Controller {
 
 		if ( $exist ) {
 
-			$query = $this->db->query("SELECT * FROM ordenes WHERE usuario_id = $id_user");
+			$query = $this->db->query("SELECT * FROM ordenes WHERE usuario_id = $id_user ORDER BY creado_en DESC");
 
 			$orders = [];
 
